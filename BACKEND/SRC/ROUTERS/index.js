@@ -1,6 +1,6 @@
 
-const Device = require("./deviceRouter");
-const User = require('./userRouter');
+const Device = require("./device");
+const User = require('./user');
 
 module.exports = { 
     Device , 

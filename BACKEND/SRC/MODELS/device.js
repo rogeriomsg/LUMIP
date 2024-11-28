@@ -4,6 +4,9 @@ const deviceSchema = new mongoose.Schema(
   {   
     name: {type : String , require : true},
     description: {type : String } ,
+  },
+  {
+    timestamps: true, // Ativa automaticamente os campos createdAt e updatedAt
   }
 );
 

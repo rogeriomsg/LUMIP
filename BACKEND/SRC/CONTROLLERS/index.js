@@ -1,5 +1,5 @@
-const Device = require('./deviceController');
-const User = require('./userController');
+const Device = require('./device');
+const User = require('./user');
 
 module.exports = { 
     Device , 

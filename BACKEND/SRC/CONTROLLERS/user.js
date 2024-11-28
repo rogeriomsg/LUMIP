@@ -1,34 +1,33 @@
 const Models = require('../MODELS');
 
 exports.getAll = async (req, res) => {
-    console.log('device_list_get');
-
-    await Models.Device.find().then(data => {        
+    await Models.User.find().then(data => {        
         res.status(200).json(data);             
     }).catch( err => {
         res.status(500).json({ message: err.message});
-    });
-       
+    });       
 };
-exports.get = async (req, res) => {
+
+exports.getById = async (req, res) => {
     const {id} = req.params ;
 
-    await Models.Device.findById(id).then(data => {        
+    await Models.User.findById(id).then(data => {        
         res.status(200).json(data);             
     }).catch( err => {
         res.status(500).json({ message: err.message});
     });
 };
 
-exports.insert = async (req, res) => {
-    //console.log(req.body);
+exports.create = async (req, res) => {
+    console.log(req.body);
 
-    const Device = new Models.Device({
+    const user = new Models.User({
         name: req.body.name,
-        description: req.body.description,
+        email: req.body.email,
+        dateOfBirth: req.body.dateOfBirth,
      });
 
-    await Models.Device.create(Device).then(data => {      
+    await Models.User.create(user).then(data => {      
         res.status(201).json(data);   
     }).catch(err => {
         res.status(404).json({message: err.message });
@@ -39,7 +38,7 @@ exports.delete = async (req, res) => {
     const {id} = req.params ;
     console.log(id);
 
-    await Models.Device.findByIdAndDelete(id).then(data => {      
+    await Models.User.findByIdAndDelete(id).then(data => {      
         res.status(204).json();   
     }).catch(err => {
         res.status(404).json({message: err.message });
@@ -49,15 +48,14 @@ exports.delete = async (req, res) => {
 exports.update = async (req, res) => {
     const {id} = req.params ;
 
-    const update = {
+    const user = {
         name: req.body.name,
-        description : req.body.description,                       
+        email: req.body.email,
+        dateOfBirth: req.body.dateOfBirth,                       
     };
-    await Models.Device.findByIdAndUpdate(id, update , {new: true}).then(data => {        
+    await Models.User.findByIdAndUpdate(id, user , {new: true}).then(data => {        
         res.status(204).json();             
     }).catch( err => {
         res.status(400).json({ message: err.message});
     }); 
 };
-
- 

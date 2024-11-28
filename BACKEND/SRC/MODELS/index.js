@@ -1,5 +1,5 @@
-const Device = require('./deviceModel');
-const User = require('./userModel');
+const Device = require('./device');
+const User = require('./user');
 
 module.exports = { 
     Device,
