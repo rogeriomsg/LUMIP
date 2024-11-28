@@ -22,7 +22,7 @@ router.post("/devices/insert",
     Controllers.Device.insert
 );
 
-router.put("/devices/:id",
+router.patch("/devices/:id",
     Middlewares.Device.validateName,
     Middlewares.Device.validateDescription,
     Controllers.Device.update
