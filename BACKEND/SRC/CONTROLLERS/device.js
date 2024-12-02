@@ -1,20 +1,24 @@
 const Models = require('../MODELS');
+const Services = require("../SERVICES")
 
 exports.getAll = async (req, res) => {
-    await Models.Device.find().then(data => {        
-        res.status(200).json(data);             
+    await Models.Device.find().then(data => { 
+        if(data.lenght === 0)
+            res.status(Services.HTTPStatus.DATABASE_RETURNED_AN_EMPTY_ARRAY.code).json({ message: Services.HTTPStatus.DATABASE_RETURNED_AN_EMPTY_ARRAY.message});        
+        else
+            res.status(Services.HTTPStatus.SUCCESS.code).json(data);          
     }).catch( err => {
-        res.status(500).json({ message: err.message});
+        res.status(Services.HTTPStatus.ERROR_SERVER_INTERNAL.code).json({ message: err.message});
     });       
 };
 
 exports.getById = async (req, res) => {
     const {id} = req.params ;
 
-    await Models.Device.findById(id).then(data => {        
-        res.status(200).json(data);             
+    await Models.Device.findById(id).then(data => {              
+        res.status(Services.HTTPStatus.SUCCESS.code).json(data);             
     }).catch( err => {
-        res.status(500).json({ message: err.message});
+        res.status(Services.HTTPStatus.DATABASE_RECORD_NOT_FOUND.code).json({ message: Services.HTTPStatus.DATABASE_RECORD_NOT_FOUND.message});
     });
 };
 
@@ -41,21 +45,21 @@ exports.create = async (req, res) => {
 
     const Device = new Models.Device({
         name: req.body.name,
-        deviceId :  req.body.deviceId || 1234,
-        device_type:  req.body.device_type || "Fotocelula",
+        deviceId :  req.body.deviceId,
+        device_type:  req.body.device_type ,
         geolocation: req.body.geolocation ,
         category: req.body.category ,
         operating_mode : req.body.operating_mode,
-        description: req.body.description || "",
+        description: req.body.description,
         rx: req.body.rx,
         is_active: req.body.is_active,
         gateway: req.body.gateway,
      });
 
     await Models.Device.create(Device).then(data => {      
-        res.status(201).json(data);   
+        res.status(Services.HTTPStatus.RECORD_CREATED_SUCCESSFULLY.code).json({ message: Services.HTTPStatus.RECORD_CREATED_SUCCESSFULLY.message,});   
     }).catch(err => {
-        res.status(404).json({message: err.message });
+        res.status(Services.HTTPStatus.INTERNAL_SERVER_ERROR.code ).json({message: err.message });
     }); 
  };
 
@@ -64,9 +68,9 @@ exports.delete = async (req, res) => {
     console.log(id);
 
     await Models.Device.findByIdAndDelete(id).then(data => {      
-        res.status(204).json();   
+        res.status(Services.HTTPStatus.RECORD_DELETED_SUCCESSFULLY.code).json({message: Services.HTTPStatus.RECORD_DELETED_SUCCESSFULLY.message });   
     }).catch(err => {
-        res.status(404).json({message: err.message });
+        res.status(Services.HTTPStatus.DATABASE_RECORD_NOT_FOUND.code).json({message: Services.HTTPStatus.DATABASE_RECORD_NOT_FOUND.message });
     }); 
 };
 
@@ -94,19 +98,19 @@ exports.update = async (req, res) => {
     const device = {
         name: req.body.name,
         deviceId:  req.body.devId,
-        device_type:  req.body.device_type || "Fotocélula",
+        device_type:  req.body.device_type,
         geolocation:  req.body.geolocation,
-        category: req.body.category ,
+        category: req.body.category,
         operating_mode : req.body.operating_mode,
-        description: req.body.description || "",
+        description: req.body.description,
         rx: req.body.rx,
         is_active: req.body.is_active,
         gateway: req.body.gateway,                       
     };
     await Models.Device.findByIdAndUpdate(id, device , {new: true}).then(data => {        
-        res.status(204).json();             
+        res.status(Services.HTTPStatus.RECORD_UPDATED_SUCCESSFULLY.code).json({ message: Services.HTTPStatus.RECORD_UPDATED_SUCCESSFULLY.message});             
     }).catch( err => {
-        res.status(400).json({ message: err.message});
+        res.status(Services.HTTPStatus.DATABASE_RECORD_NOT_FOUND.code).json({message: Services.HTTPStatus.DATABASE_RECORD_NOT_FOUND.message });
     }); 
 };
 

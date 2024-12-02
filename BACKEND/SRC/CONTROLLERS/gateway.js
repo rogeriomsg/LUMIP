@@ -1,4 +1,5 @@
 const Models = require('../MODELS');
+const Services = require("../SERVICES")
 
 exports.getAll = async (req, res) => {
     await Models.Gateway.find().then(data => {        
@@ -14,7 +15,7 @@ exports.getById = async (req, res) => {
     await Models.Gateway.findById(id).then(data => {        
         res.status(200).json(data);             
     }).catch( err => {
-        res.status(500).json({ message: err.message});
+        res.status(422).json({ message: err.message});
     });
 };
 
@@ -23,9 +24,9 @@ exports.delete = async (req, res) => {
     console.log(id);
 
     await Models.Gateway.findByIdAndDelete(id).then(data => {      
-        res.status(204).json();   
+        res.status(Services.HTTPStatus.RECORD_DELETED_SUCCESSFULLY.code).json({message: Services.HTTPStatus.RECORD_DELETED_SUCCESSFULLY.message });   
     }).catch(err => {
-        res.status(404).json({message: err.message });
+        res.status(Services.HTTPStatus.DATABASE_RECORD_NOT_FOUND.code).json({message: Services.HTTPStatus.DATABASE_RECORD_NOT_FOUND.message });
     }); 
 };
 
@@ -43,16 +44,16 @@ exports.create = async (req, res) => {
     */
 
     const gateway = new Models.Gateway({
-        name: req.body.name || "",
+        name: req.body.name ,
         gId: req.body.gId,
         geolocation: req.body.geolocation,
-        address: req.body.address || "",
+        address: req.body.address,
      });
 
     await Models.Gateway.create(gateway).then(data => {      
-        res.status(201).json(data);   
+        res.status(Services.HTTPStatus.RECORD_CREATED_SUCCESSFULLY.code).json({ message: Services.HTTPStatus.RECORD_CREATED_SUCCESSFULLY.message,});   
     }).catch(err => {
-        res.status(404).json({message: err.message });
+        res.status(Services.HTTPStatus.INTERNAL_SERVER_ERROR.code ).json({message: err.message });
     }); 
  };
 
@@ -70,14 +71,14 @@ exports.update = async (req, res) => {
     */
 
     const update = {
-        name: req.body.name || "",
+        name: req.body.name,
         gatewayId: req.body.gId,
         geolocation: req.body.geolocation,
-        address: req.body.address || "",                     
+        address: req.body.address,                     
     };
     await Models.Gateway.findByIdAndUpdate(id, update , {new: true}).then(data => {        
-        res.status(204).json();             
+        res.status(Services.HTTPStatus.RECORD_UPDATED_SUCCESSFULLY.code).json({ message: Services.HTTPStatus.RECORD_UPDATED_SUCCESSFULLY.message});             
     }).catch( err => {
-        res.status(400).json({ message: err.message});
+        res.status(Services.HTTPStatus.DATABASE_RECORD_NOT_FOUND.code).json({message: Services.HTTPStatus.DATABASE_RECORD_NOT_FOUND.message });
     }); 
 };

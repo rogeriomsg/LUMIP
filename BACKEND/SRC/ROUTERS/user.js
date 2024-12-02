@@ -8,17 +8,16 @@ const Middlewares = require('../MIDDLEWARES');
 *   4XX = Erro do cliente
 *   5XX = Erro do Servidor
 */
-const textObject = "user" 
 
-router.get(`/${textObject}`, Controllers.User.getAll);
+router.get(`/`, Controllers.User.getAll);
 
-router.get(`/${textObject}/:id`, Controllers.User.getById);
+router.get(`/:id`, Controllers.User.getById);
 
-router.delete(`/${textObject}/:id`, Controllers.User.delete);
+router.delete(`/:id`, Controllers.User.delete);
 
-router.post(`/${textObject}/create`, Middlewares.User.ValidateFields, Controllers.User.create);
+router.post(`/create`, Middlewares.User.Validate, Controllers.User.create);
 
-router.patch(`/${textObject}/:id`, Middlewares.User.ValidateFields, Controllers.User.update);
+router.patch(`/:id`, Middlewares.User.Validate, Controllers.User.update);
 
 
 module.exports = router;
