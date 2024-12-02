@@ -8,23 +8,16 @@ const Middlewares = require('../MIDDLEWARES');
 *   4XX = Erro do cliente
 *   5XX = Erro do Servidor
 */
+const textObject = "device" 
 
-router.get("/devices",Controllers.Device.getAll);
+router.get(`/${textObject}`,Controllers.Device.getAll);
 
-router.get("/devices/:id",Controllers.Device.getById);
+router.get(`/${textObject}/:id`,Controllers.Device.getById);
 
-router.delete("/devices/:id",Controllers.Device.delete);
+router.delete(`/${textObject}/:id`,Controllers.Device.delete);
 
-router.post("/devices/create",
-    Middlewares.Device.validateName,
-    Middlewares.Device.validateDescription,
-    Controllers.Device.insert
-);
+router.post(`/${textObject}/create`, Middlewares.Device.ValidateFields, Controllers.Device.create );
 
-router.patch("/devices/:id",
-    Middlewares.Device.validateName,
-    Middlewares.Device.validateDescription,
-    Controllers.Device.update
-);
+router.patch(`/${textObject}/:id`, Middlewares.Device.ValidateFields, Controllers.Device.update );
 
 module.exports = router;

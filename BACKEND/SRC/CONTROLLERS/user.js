@@ -1,6 +1,7 @@
 const Models = require('../MODELS');
 
 exports.getAll = async (req, res) => {
+    console.log(req.body);
     await Models.User.find().then(data => {        
         res.status(200).json(data);             
     }).catch( err => {

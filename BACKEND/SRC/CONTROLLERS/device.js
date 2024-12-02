@@ -18,11 +18,11 @@ exports.getById = async (req, res) => {
     });
 };
 
-exports.insert = async (req, res) => {
-    //console.log(req.body);
+exports.create = async (req, res) => {
+    console.log(req.body);
     /*
     name: {type : String , require : true},
-    devId :  { type : Number , require : true },
+    deviceId :  { type : Number , require : true },
     device_type:  { type: String , default : "Fotocélula" },
     geolocation:  { 
       lat: { type : Number , default : 0 },
@@ -41,19 +41,13 @@ exports.insert = async (req, res) => {
 
     const Device = new Models.Device({
         name: req.body.name,
-        devId :  req.body.devId,
-        device_type:  req.body.device_type || "Fotocélula",
-        geolocation:  { 
-            lat: req.body.geolocation.lat || 0.0,
-            lng: req.body.geolocation.lng || 0.0,
-            alt: req.body.geolocation.alt || 0.0,
-        },
+        deviceId :  req.body.deviceId || 1234,
+        device_type:  req.body.device_type || "Fotocelula",
+        geolocation: req.body.geolocation ,
         category: req.body.category ,
         operating_mode : req.body.operating_mode,
         description: req.body.description || "",
-        rx:  { 
-            hopCount: req.body.rx.hopCount,
-        },
+        rx: req.body.rx,
         is_active: req.body.is_active,
         gateway: req.body.gateway,
      });
@@ -80,7 +74,7 @@ exports.update = async (req, res) => {
     const {id} = req.params ;
     /*
     name: {type : String , require : true},
-    devId :  { type : Number , require : true },
+    deviceId :  { type : Number , require : true },
     device_type:  { type: String , default : "Fotocélula" },
     geolocation:  { 
       lat: { type : Number , default : 0 },
@@ -99,19 +93,13 @@ exports.update = async (req, res) => {
 
     const device = {
         name: req.body.name,
-        devId :  req.body.devId,
+        deviceId:  req.body.devId,
         device_type:  req.body.device_type || "Fotocélula",
-        geolocation:  { 
-            lat: req.body.geolocation.lat || 0.0,
-            lng: req.body.geolocation.lng || 0.0,
-            alt: req.body.geolocation.alt || 0.0,
-        },
+        geolocation:  req.body.geolocation,
         category: req.body.category ,
         operating_mode : req.body.operating_mode,
         description: req.body.description || "",
-        rx:  { 
-            hopCount: req.body.rx.hopCount,
-        },
+        rx: req.body.rx,
         is_active: req.body.is_active,
         gateway: req.body.gateway,                       
     };

@@ -3,16 +3,22 @@ const router = express.Router();
 const Controllers = require("../CONTROLLERS")
 const Middlewares = require('../MIDDLEWARES');
 
+/* HTTP status
+*   2XX = sucesso
+*   4XX = Erro do cliente
+*   5XX = Erro do Servidor
+*/
+const textObject = "user" 
 
-router.get("/user",Controllers.User.getAll);
+router.get(`/${textObject}`, Controllers.User.getAll);
 
-router.get("/user/:id",Controllers.User.getById);
+router.get(`/${textObject}/:id`, Controllers.User.getById);
 
-router.delete("/user/:id",Controllers.User.delete);
+router.delete(`/${textObject}/:id`, Controllers.User.delete);
 
-router.post("/user/create",Middlewares.User.validateName,Controllers.User.create);
+router.post(`/${textObject}/create`, Middlewares.User.ValidateFields, Controllers.User.create);
 
-router.patch("/user/:id",Middlewares.User.validateName,Controllers.User.update);
+router.patch(`/${textObject}/:id`, Middlewares.User.ValidateFields, Controllers.User.update);
 
 
 module.exports = router;

@@ -1,33 +1,52 @@
-exports.validateName = async (req, res , next) => {
-    console.log(req.body);
-
+const validateName = async (req) => {
+    //console.log(req.body);
     const {body} = req ;
-
     if(body.name === undefined)
     {
-        return res.status(400).json({message:"The field 'Name' is required." })
+        throw new Error("The field 'Name' is required.");
+        //return res.status(400).json({message:"The field 'Name' is required." })
     }
     if(body.name === "")
     {
-        return res.status(400).json({message:"The field 'Name' cannot be empty." })
-    }
-
-    next();       
+        throw new Error("The field 'Name' cannot be empty.");
+        //return res.status(400).json({message:"The field 'Name' cannot be empty." })
+    }     
  };
 
- exports.validateDescription = async (req, res , next) => {
-    console.log(req.body);
-
+const validateDeviceId = async (req) => {
+    //console.log(req.body);
     const {body} = req ;
-
-    if(body.description === undefined)
+    if(body.deviceId === undefined)
     {
-        return res.status(400).json({message:"The field 'description' is required." })
+        throw new Error("The field 'devideId' is required.");
+        //return res.status(400).json({message:"The field 'devideId' is required." })
     }
-    if(body.description === "")
+    if(body.desviceId <= 0)
     {
-        return res.status(400).json({message:"The field 'description' cannot be empty." })
-    }
-
-    next();       
+        throw new Error("The field 'deviceId' must have a number greater than 0");
+        //return res.status(400).json({message:"The field 'deviceId' must have a number greater than 0" })
+    }       
  };
+
+ // Middleware de validação geral
+const ValidateFields = async (req, res, next) => {
+    try {
+      // Executa todas as validações em paralelo
+      await Promise.all([
+        validateName(req),
+        validateDeviceId(req),
+        //adicionar aqui mais funcões de validação conforme necessário
+      ]);
+      next(); // Continua para o controlador se todas as validações passarem
+    } catch (error) {
+      res.status(400).json({ error: error.message }); // Retorna o erro de validação
+    }
+};
+
+module.exports = { 
+    ValidateFields ,
+};
+
+
+
+

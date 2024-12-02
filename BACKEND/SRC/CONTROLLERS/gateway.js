@@ -29,11 +29,11 @@ exports.delete = async (req, res) => {
     }); 
 };
 
-exports.insert = async (req, res) => {
+exports.create = async (req, res) => {
     //console.log(req.body);
     /*
     name: { type: String , default: ""},        
-    gId : { type: String },
+    gatewayId : { type: String ,require :true},
     geolocation:{
         lat:{ type : Number , default: 0 },
         lng:{ type : Number , default: 0},
@@ -45,11 +45,7 @@ exports.insert = async (req, res) => {
     const gateway = new Models.Gateway({
         name: req.body.name || "",
         gId: req.body.gId,
-        geolocation:{
-            lat: req.body.geolocation.lat || 0.0,
-            lng: req.body.geolocation.lnt || 0.0,
-            alt: req.body.geolocation.alt || 0.0,
-        },
+        geolocation: req.body.geolocation,
         address: req.body.address || "",
      });
 
@@ -63,8 +59,8 @@ exports.insert = async (req, res) => {
 exports.update = async (req, res) => {
     const {id} = req.params ;
     /*
-    name: { type: String , default: ""},        
-    gId : { type: String },
+   name: { type: String , default: ""},        
+    gatewayId : { type: String ,require :true},
     geolocation:{
         lat:{ type : Number , default: 0 },
         lng:{ type : Number , default: 0},
@@ -75,12 +71,8 @@ exports.update = async (req, res) => {
 
     const update = {
         name: req.body.name || "",
-        gId: req.body.gId,
-        geolocation:{
-            lat: req.body.geolocation.lat || 0.0,
-            lng: req.body.geolocation.lnt || 0.0,
-            alt: req.body.geolocation.alt || 0.0,
-        },
+        gatewayId: req.body.gId,
+        geolocation: req.body.geolocation,
         address: req.body.address || "",                     
     };
     await Models.Gateway.findByIdAndUpdate(id, update , {new: true}).then(data => {        

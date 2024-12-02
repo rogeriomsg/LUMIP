@@ -18,7 +18,7 @@ exports.getById = async (req, res) => {
     });
 };
 
-exports.insert = async (req, res) => {
+exports.create = async (req, res) => {
     //console.log(req.body);
 
     const Device = new Models.DeviceCategory({
