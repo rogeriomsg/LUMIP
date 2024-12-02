@@ -1,34 +1,40 @@
 const Services = require("../SERVICES")
 
+function printf(format, ...args) {
+    return format.replace(/%s/g, () => args.shift());
+}
+
 const validateName = async (req, res) => {
     if(req.method !== 'POST' ) return;
-    //console.log(req.body);    
+    console.log("validateName  "+req.body); 
+    const campo = "name";   
     const {body} = req ;
-    if(body.name === undefined)
+    if(body[campo] === undefined)
     {
-        res.status(Services.HTTPStatus.MANDATORY_FIELDS_NOT_PROVIDED_OR_INVALID);
-        throw new Error("The field 'Name' is required.");
+        res.status(Services.HTTPStatus.MANDATORY_FIELDS_NOT_PROVIDED.code);
+        throw new Error(printf(Services.HTTPStatus.MANDATORY_FIELDS_NOT_PROVIDED.message,campo));
     }
-    if(body.name === "")
+    if(body[campo].trim() === "")
     {
-        res.status(400);
-        throw new Error("The field 'Name' cannot be empty.");
+        res.status(Services.HTTPStatus.EMPTY_MANDATORY_FIELDS.code);
+        throw new Error(printf(Services.HTTPStatus.EMPTY_MANDATORY_FIELDS.message,campo));
     }     
  };
 
 const validateDeviceId = async (req, res) => {
     if(req.method !== 'POST' ) return;
-    //console.log(req.body);
+    console.log("validateDeviceId  "+req.body);
+    const campo = "deviceId";   
     const {body} = req ;
-    if(body.deviceId === undefined)
+    if(body[campo] === undefined)
     {
-        res.status(Services.HTTPStatus.MANDATORY_FIELDS_NOT_PROVIDED_OR_INVALID);
-        throw new Error("The field 'devideId' is required.");
+        res.status(Services.HTTPStatus.MANDATORY_FIELDS_NOT_PROVIDED.code);
+        throw new Error(printf(Services.HTTPStatus.MANDATORY_FIELDS_NOT_PROVIDED.message,campo));
     }
-    if(body.desviceId <= 0)
+    if(body[campo] <= 0)
     {
-        res.status(Services.HTTPStatus.MANDATORY_FIELDS_NOT_PROVIDED_OR_INVALID);
-        throw new Error("The field 'deviceId' must have a number greater than 0");
+        res.status(Services.HTTPStatus.INVALID_MANDATORY_FIELDS.code);
+        throw new Error(printf(Services.HTTPStatus.INVALID_MANDATORY_FIELDS.message,campo));
     }       
  }; 
 
