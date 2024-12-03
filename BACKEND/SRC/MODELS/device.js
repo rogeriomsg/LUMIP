@@ -4,7 +4,7 @@ const deviceSchema = new mongoose.Schema(
   {   
     name: {type : String , require : true},
     deviceId :  { type : Number , require : true },
-    device_type:  { type: String , default : "Fotocélula" },
+    device_type:  { type: String , default : "Fotocelula" },
     geolocation:  { 
       lat: { type : Number , default : 0.0  },
       lng: { type : Number , default : 0.0  },

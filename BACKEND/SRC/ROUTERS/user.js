@@ -15,9 +15,9 @@ router.get(`/:id`, Controllers.User.getById);
 
 router.delete(`/:id`, Controllers.User.delete);
 
-router.post(`/create`, Middlewares.User.Validate, Controllers.User.create);
+router.post(`/create`,  Controllers.User.create);
 
-router.patch(`/:id`, Middlewares.User.Validate, Controllers.User.update);
+router.patch(`/:id`, Controllers.User.update);
 
 
 module.exports = router;

@@ -5,7 +5,7 @@ exports.getAll = async (req, res) => {
     console.log("Teste");
 
     await Models.DeviceCategory.find().then(data => {     
-        if(data.lenght === 0)
+        if(data.length === 0)
             res.status(Services.HTTPStatus.DATABASE_RETURNED_AN_EMPTY_ARRAY.code).json({ message: Services.HTTPStatus.DATABASE_RETURNED_AN_EMPTY_ARRAY.message});   
         else         
             res.status(Services.HTTPStatus.SUCCESS.code).json(data);   

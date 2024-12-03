@@ -1,7 +1,7 @@
-const Device = require('./device');
-const User = require('./user');
+const Validations = require('./VALIDATIONS');
+const Message = require('./message');
 
 module.exports = { 
-    Device , 
-    User,
+    Validations ,
+    Message, 
 };

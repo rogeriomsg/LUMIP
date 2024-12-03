@@ -4,7 +4,7 @@ const HTTPStatus = Object.freeze(
         RECORD_CREATED_SUCCESSFULLY:                {code:201, message:"Record created successfully."}, 
         RECORD_DELETED_SUCCESSFULLY:                {code:200, message:"Record deleted successfully."},
         RECORD_UPDATED_SUCCESSFULLY:                {code:200, message:"Record updated successfully."},
-        DATABASE_RETURNED_AN_EMPTY_ARRAY:           {code:204, message:"Database returned an empty dataset."}, 
+        DATABASE_RETURNED_AN_EMPTY_ARRAY:           {code:200, message:"Database returned an empty dataset."}, 
         MANDATORY_FIELDS_NOT_PROVIDED:              {code:400, message:"Field %s is required."},
         EMPTY_MANDATORY_FIELDS:                     {code:400, message:"Field %s cannot be empty."},
         INVALID_MANDATORY_FIELDS:                   {code:400, message:"Field %s is invalid."},

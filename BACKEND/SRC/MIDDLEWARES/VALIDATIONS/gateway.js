@@ -1,4 +1,4 @@
-const Services = require("../SERVICES")
+const Services = require("../../SERVICES")
 
 
 const validateDeviceId = async (req, res) => {

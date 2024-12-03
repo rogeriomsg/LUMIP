@@ -3,12 +3,12 @@ const Services = require("../SERVICES")
 
 exports.getAll = async (req, res) => {
     await Models.Device.find().then(data => { 
-        if(data.lenght === 0)
+        if(data.length === 0)
             res.status(Services.HTTPStatus.DATABASE_RETURNED_AN_EMPTY_ARRAY.code).json({ message: Services.HTTPStatus.DATABASE_RETURNED_AN_EMPTY_ARRAY.message});        
         else
             res.status(Services.HTTPStatus.SUCCESS.code).json(data);          
     }).catch( err => {
-        res.status(Services.HTTPStatus.ERROR_SERVER_INTERNAL.code).json({ message: err.message});
+        res.status(Services.HTTPStatus.INTERNAL_SERVER_ERROR.code).json({ message: err.message});
     });       
 };
 
