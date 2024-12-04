@@ -15,8 +15,8 @@ router.get(`/:id`,Controllers.Device.getById);
 
 router.delete(`/:id`,Controllers.Device.delete);
 
-router.post(`/create`, Middlewares.Validations.Device.ValidateCreationBodyCelebrate, Controllers.Device.create );
+router.post(`/create`, Middlewares.Validations.Device.Validate , Controllers.Device.create );
 
-router.patch(`/:id`, Middlewares.Validations.Device.ValidateCreationBodyExpress, Controllers.Device.update );
+router.patch(`/:id`, Middlewares.Validations.Device.Validate , Controllers.Device.update );
 
 module.exports = router;
