@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Controllers = require("../CONTROLLERS")
-const Middlewares = require('../MIDDLEWARES');
+const {Validations} = require('../MIDDLEWARES');
 
 /* HTTP status
 *   2XX = sucesso
@@ -15,8 +15,8 @@ router.get(`/:id`,Controllers.Device.getById);
 
 router.delete(`/:id`,Controllers.Device.delete);
 
-router.post(`/create`, Middlewares.Validations.Device.Validate , Controllers.Device.create );
+router.post(`/create`, Validations.Device.Validate , Controllers.Device.create );
 
-router.patch(`/:id`, Middlewares.Validations.Device.Validate , Controllers.Device.update );
+router.patch(`/:id`, Validations.Device.Validate , Controllers.Device.update );
 
 module.exports = router;
