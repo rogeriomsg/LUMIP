@@ -1,16 +1,3 @@
-// import Banner from './componentes/Banner';
-// import Formulario from './componentes/Formulario';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <Banner />
-//       <Formulario />
-//     </div>
-//   );
-// }
-
-// export default App;
 
 import React, { useState } from "react";
 //import reactLogo from "./assets/react.svg";
@@ -21,6 +8,7 @@ import { Sidebar } from "./componentes/Sidebar";
 import { Light, Dark } from "./styles/Themes";
 import { ThemeProvider } from "styled-components";
 export const ThemeContext = React.createContext(null);
+
 function App() {
   const [theme, setTheme] = useState("light");
   const themeStyle = theme === "light" ? Light : Dark;

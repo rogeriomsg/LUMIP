@@ -6,6 +6,7 @@ import {
   AiOutlineHome,
   AiOutlineApartment,
   AiOutlineSetting,
+  AiOutlineDashboard
 } from "react-icons/ai";
 import { MdOutlineAnalytics, MdLogout } from "react-icons/md";
 import { NavLink } from "react-router-dom";
@@ -89,7 +90,7 @@ const linksArray = [
   },
   {
     label: "Dispositivos",
-    icon: <AiOutlineHome />,
+    icon: <AiOutlineDashboard />,
     to: "/devices",
   },
   {
@@ -103,14 +104,14 @@ const linksArray = [
     to: "/diagramas",
   },
   {
-    label: "Relatorios",
+    label: "Relatórios",
     icon: <MdOutlineAnalytics />,
     to: "/reportes",
   },
 ];
 const secondarylinksArray = [
   {
-    label: "Configuracoes",
+    label: "Configurações",
     icon: <AiOutlineSetting />,
     to: "/null",
   },

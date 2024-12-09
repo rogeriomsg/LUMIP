@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export function Products() {
+export function PageProducts() {
   return (
     <Container>
       <h1>Productos</h1>

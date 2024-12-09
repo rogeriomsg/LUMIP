@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export function Reportes() {
+export function PageReportes() {
   return (<Container>
 <h1>Reportes</h1>
   </Container>);

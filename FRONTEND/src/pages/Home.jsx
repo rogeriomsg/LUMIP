@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export function Home() 
+export function PageHome() 
 {
   return (
     <Container>
@@ -8,6 +8,7 @@ export function Home()
     </Container>
   );
 }
+
 
 
 const Container = styled.div`

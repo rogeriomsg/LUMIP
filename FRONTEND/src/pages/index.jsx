@@ -1,13 +1,13 @@
-const Home = require("./Home");
-const Devices = require("./Devices");
-const Diagramas = require("./Diagramas");
-const Products = require("./Products");
-const Reportes = require("./Reportes");
+import {PageHome}  from "./Home"
+import {PageDevices} from "./Devices"
+import {PageDiagramas} from "./Diagramas"
+import {PageProducts} from "./Products"
+import {PageReportes} from "./Reportes"
 
-module.exports = {
-    Home,
-    Devices,
-    Diagramas,
-    Products,    
-    Reportes,
-};
+export {
+    PageHome,
+    PageDevices,
+    PageDiagramas,
+    PageProducts,    
+    PageReportes,
+}

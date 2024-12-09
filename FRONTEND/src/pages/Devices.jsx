@@ -2,11 +2,12 @@ import styled from "styled-components";
 import CreateDeviceForm from "../componentes/Formulario/CreateDevice";
 
 
-export function Devices() 
+export function PageDevices() 
 {
   return (
     <Container>
-        <CreateDeviceForm/>
+      <h1>Dispositivos</h1>
+      <CreateDeviceForm />
     </Container>
   );
 }

@@ -1,5 +1,7 @@
 import styled from "styled-components";
-export function Diagramas() {
+
+
+export function PageDiagramas() {
   return (<Container>
 <h1>Diagramas</h1>
   </Container>);
