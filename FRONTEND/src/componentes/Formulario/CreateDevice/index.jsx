@@ -11,9 +11,7 @@ import styled from "styled-components";
 // Componente do formulário
 const CreateDeviceForm = () => {
 
-  const { theme } = useContext(ThemeContext);
-
-  
+  const { theme } = useContext(ThemeContext);  
 
   const validationSchema = Yup.object().shape({
     firstName: Yup.string().required("Nome é obrigatório."),
@@ -76,11 +74,11 @@ const CreateDeviceForm = () => {
 
 
 const FormWrapper = styled.div`
-  margin: 10px 0;
+  /*margin: 10px 0;
   background-color: ${(props) => props.theme.bg1};
   border-radius: 16px;
   padding: 32px 32px;
-  box-shadow: 8px 8px 16px rgba(0,0,0, 0.08);
+  box-shadow: 8px 8px 16px rgba(0,0,0, 0.08);*/
 `;
 
 
