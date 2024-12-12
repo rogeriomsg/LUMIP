@@ -21,11 +21,16 @@ export function CustomTextField ({ label, ...props }){
             {...props}
             label={label}
             variant="outlined"  
-            size="small"    
-            focused     
+            size="small"
             error={meta.touched && Boolean(meta.error)}
             helperText={meta.touched && meta.error}
+            sx={{
+                  "& .MuiOutlinedInput-root.Mui-completed": {
+                      backgroundColor: 'white'
+                  }
+            }}
           />
+
         
       )}
     />
@@ -35,5 +40,6 @@ export function CustomTextField ({ label, ...props }){
 const ContentText = styled.div`
   /*color: ${(props) => props.theme.text};*/
   color: #fff ;
+  backgroundColor: #FF00FF ;
 `;
   

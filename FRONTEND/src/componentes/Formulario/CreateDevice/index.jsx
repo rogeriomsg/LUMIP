@@ -4,9 +4,9 @@ import * as Yup from "yup";
 import { Button, Box } from "@mui/material";
 import { CustomTextField } from "../../CustomTextField";
 
-import { ThemeContext } from "../../../App";
-import { useContext } from "react";
 import styled from "styled-components";
+import { useContext } from "react";
+import { ThemeContext } from "../../../App";
 
 // Componente do formulário
 const CreateDeviceForm = () => {
@@ -48,6 +48,8 @@ const CreateDeviceForm = () => {
         <Form>    
           <FormWrapper themeUse={theme}>
             
+
+
             <Box  mb={2} >
               <CustomTextField name="firstName" className="content-text" label="Nome" focused/>
             </Box>
@@ -64,7 +66,11 @@ const CreateDeviceForm = () => {
               disabled={isSubmitting}
             >
               {isSubmitting ? "Enviando..." : "Enviar"}
-            </Button>              
+            </Button> 
+
+
+
+
           </FormWrapper>            
         </Form>
       )}
@@ -74,11 +80,11 @@ const CreateDeviceForm = () => {
 
 
 const FormWrapper = styled.div`
-  /*margin: 10px 0;
-  background-color: ${(props) => props.theme.bg1};
+  margin: 10px 0;
+  background-color: ${(props) => props.theme.bg3};
   border-radius: 16px;
   padding: 32px 32px;
-  box-shadow: 8px 8px 16px rgba(0,0,0, 0.08);*/
+  box-shadow: 8px 8px 16px rgba(0,0,0, 0.08);
 `;
 
 
