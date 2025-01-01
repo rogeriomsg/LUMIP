@@ -1,45 +1,36 @@
 
-import React, { useState } from "react";
-//import reactLogo from "./assets/react.svg";
-import { MyRoutes } from "./routers/routes";
-import styled from "styled-components";
-import { BrowserRouter } from "react-router-dom";
-import { Sidebar } from "./componentes/Sidebar";
-import { Light, Dark } from "./styles/Themes";
-import { ThemeProvider } from "styled-components";
-export const ThemeContext = React.createContext(null);
+import React, { useState } from 'react';
+import { Container, AppBar, Toolbar, Typography, Button } from '@mui/material';
+import Sidebar from './componentes/Sidebar';
+import MyForm from './componentes/Formulario/CreateDevice/';
 
-function App() {
-  const [theme, setTheme] = useState("light");
-  const themeStyle = theme === "light" ? Light : Dark;
+const App = ({ toggleTheme }) => {
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
 
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
+
   return (
     <>
-      <ThemeContext.Provider value={{ setTheme, theme }}>
-        <ThemeProvider theme={themeStyle}>
-          <BrowserRouter>
-            <Container className={sidebarOpen ? "sidebarState active" : ""}>
-              <Sidebar
-                sidebarOpen={sidebarOpen}
-                setSidebarOpen={setSidebarOpen}
-              />
-              <MyRoutes />
-            </Container>
-          </BrowserRouter>
-        </ThemeProvider>
-      </ThemeContext.Provider>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+            Meu App
+          </Typography>
+          <Button color="inherit" onClick={toggleTheme}>
+            Alternar Tema
+          </Button>
+        </Toolbar>
+      </AppBar>
+      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+      <Container sx={{ marginTop: 4 }}>
+        <Typography variant="h4" gutterBottom>
+          Bem-vindo ao Meu App
+        </Typography>
+        <MyForm />
+      </Container>
     </>
   );
-}
-const Container = styled.div`
-  display: grid;
-  grid-template-columns: 90px auto;
-  background: ${({ theme }) => theme.bgtotal};
-  transition:all 0.5s ;
-  &.active {
-    grid-template-columns: 300px auto;
-  }
-  color:${({theme})=>theme.text};
-`;
+};
+
 export default App;
+

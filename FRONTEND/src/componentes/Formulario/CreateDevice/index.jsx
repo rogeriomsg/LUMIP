@@ -1,92 +1,49 @@
-import React from "react";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
-import { Button, Box } from "@mui/material";
-import { CustomTextField } from "../../CustomTextField";
+import React from 'react';
+import { Formik, Form, Field } from 'formik';
+import { TextField, Button } from '@mui/material';
+import * as Yup from 'yup';
 
-import styled from "styled-components";
-import { useContext } from "react";
-import { ThemeContext } from "../../../App";
+const validationSchema = Yup.object({
+  name: Yup.string().required('Campo obrigatório'),
+  email: Yup.string().email('E-mail inválido').required('Campo obrigatório'),
+});
 
-// Componente do formulário
-const CreateDeviceForm = () => {
-
-  const { theme } = useContext(ThemeContext);  
-
-  const validationSchema = Yup.object().shape({
-    firstName: Yup.string().required("Nome é obrigatório."),
-    email: Yup.string().email("Email inválido.").required("Email é obrigatório."),
-  });
-  // Valores iniciais
-  const initialValues = {
-    firstName: "",
-    email: "",
-    password: "",
-  };
-
-  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
-    try {
-      console.log("Valores do formulário enviados:", values);
-      // Simular requisição assí­ncrona
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      alert("Formulário enviado com sucesso!");
-      resetForm();
-    } catch (error) {
-      console.error("Erro ao enviar o formulário:", error);
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  return (    
+const MyForm = () => {
+  return (
     <Formik
-      initialValues={initialValues}
+      initialValues={{ name: '', email: '' }}
       validationSchema={validationSchema}
-      onSubmit={handleSubmit}        
+      onSubmit={(values) => {
+        console.log(values);
+      }}
     >
-      {({ isSubmitting, values }) => (
-        <Form>    
-          <FormWrapper themeUse={theme}>
-            
-
-
-            <Box  mb={2} >
-              <CustomTextField name="firstName" className="content-text" label="Nome" focused/>
-            </Box>
-            <Box mb={2}>
-              <CustomTextField name="email" label="Email" size="small" />
-            </Box>
-            <Box mb={2}>
-              <CustomTextField type="password" name="password" label="Senha" size="small" />
-            </Box>          
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? "Enviando..." : "Enviar"}
-            </Button> 
-
-
-
-
-          </FormWrapper>            
+      {({ errors, touched }) => (
+        <Form>
+          <Field
+            name="name"
+            as={TextField}
+            label="Nome"
+            error={touched.name && Boolean(errors.name)}
+            helperText={touched.name && errors.name}
+            fullWidth
+            margin="normal"
+          />
+          <Field
+            name="email"
+            as={TextField}
+            label="E-mail"
+            error={touched.email && Boolean(errors.email)}
+            helperText={touched.email && errors.email}
+            fullWidth
+            margin="normal"
+          />
+          <Button type="submit" variant="contained" color="primary">
+            Enviar
+          </Button>
         </Form>
       )}
     </Formik>
   );
 };
 
-
-const FormWrapper = styled.div`
-  margin: 10px 0;
-  background-color: ${(props) => props.theme.bg3};
-  border-radius: 16px;
-  padding: 32px 32px;
-  box-shadow: 8px 8px 16px rgba(0,0,0, 0.08);
-`;
-
-
-
-export default CreateDeviceForm;
+export default MyForm;
