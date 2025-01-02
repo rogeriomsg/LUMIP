@@ -9,8 +9,9 @@ app.use("/device",router.Device)
 app.use("/user",router.User)
 app.use("/gateway",router.Gateway)
 app.use("/device_category",router.DeviceCategory)
+app.use("/api",router.WebhookToMQTT)
 
-// Middleware para tratar erros de validação
+// Middleware para tratar erros de validaï¿½ï¿½o
 app.use(errors());
 
 //app.use(ValidationErrorMessage);
