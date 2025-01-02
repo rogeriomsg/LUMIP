@@ -7,9 +7,9 @@ mqttClient.connect();
 exports.ordersClosed = async (req, res) => {
 
 
-    //console.log(req.body.msg)
+    console.log(req.body.msg)
 
-    mqttClient.sendMessage(req.body.msg)
+    //mqttClient.sendMessage(req.body.msg)
 
 
 
