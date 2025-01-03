@@ -15,6 +15,8 @@ exports.getAll = async (req, res) => {
 exports.getById = async (req, res) => {
     const {id} = req.params ;
 
+    console.log(id)
+
     await Models.Device.findById(id).then(data => {              
         res.status(Services.HTTPStatus.SUCCESS.code).json(data);             
     }).catch( err => {
@@ -27,7 +29,7 @@ exports.create = async (req, res) => {
     /*
     name: {type : String , require : true},
     deviceId :  { type : Number , require : true },
-    device_type:  { type: String , default : "Fotocélula" },
+    device_type:  { type: String , default : "Fotocï¿½lula" },
     geolocation:  { 
       lat: { type : Number , default : 0 },
       lng: { type : Number , default : 0 },
@@ -79,7 +81,7 @@ exports.update = async (req, res) => {
     /*
     name: {type : String , require : true},
     deviceId :  { type : Number , require : true },
-    device_type:  { type: String , default : "Fotocélula" },
+    device_type:  { type: String , default : "Fotocï¿½lula" },
     geolocation:  { 
       lat: { type : Number , default : 0 },
       lng: { type : Number , default : 0 },
